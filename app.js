@@ -89,6 +89,6 @@ app.use((err, req, res, next) => {
   }
 })
 
-app.listen(3065, () => {
-  logger.info('server on 3065')
+app.listen(process.env.PORT, () => {
+  logger.info(`server on ${process.env.PORT}`)
 })

@@ -51,8 +51,8 @@ if (process.env.NODE_ENV === 'production') {
     resave: false,
     saveUninitialized: true,
     cookie: {
-      httpOnly: true,
-      secure: true
+      httpOnly: true
+      // secure: true
     },
     store: new RedisStore({
       host: process.env.REDIS_HOST,

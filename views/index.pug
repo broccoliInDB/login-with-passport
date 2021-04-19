@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title HOME
+  body 
+    h1 패스포트로 로그인 연습하기
+
+    if isLogged 
+      h1 #{nickname}님 안녕하세요~
+      form(action='/user/changepw' method='post')
+        h2 비밀번호 변경하기
+        if message
+          p #{message}
+        label(for="password1") 비밀번호 
+        input(type="password" id='password1' placeholder='변경할 비밀번호' name='password1')
+        label(for="password2") 비밀번호 확인
+        input(type="password" id='password2' placeholder='변경할 비밀번호 확인' name='password2')
+        button(type='submit') 변경하기
+      a(href=`/user/${id}`)
+        button 내공간으로 이동 
+      a(href='/auth/logout')
+        button 로그아웃
+    else 
+      if message 
+        p #{message}
+      form(action="/auth/login" method='post') 
+        label(for="email") 이메일
+        input(type="email" id='email' placeholder='이메일' name='email' required)
+        label(for="pw") 비밀번호
+        input(type="password" id='pw' placeholder='비밀번호' name='password' required)  
+        button(type='submit') 로그인
+      a(href="/signup")
+        button 회원가입
+      a(href="/auth/github") 
+        button 깃헙 로그인
+      a(href="/auth/google") 
+        button 구글 로그인
+      a(href="/auth/facebook") 
+        button 카카오 로그인
+      a(href="/auth/kakao") 
+        button 카카오 로그인

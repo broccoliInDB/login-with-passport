@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title 회원가입
+  body 
+    if (message)
+      p #{message}
+    form(action="/signup" method='post')
+      label(for="email") 이메일
+      input(type="email" id='email' name='email' placeholder='이메일' required)
+      label(for='password') 비밀번호
+      input(type='password' id='password' name='password' placeholder='비밀번호' required)
+      label(for="nickname") 닉네임
+      input(type='text' id='nickname' name='nickname' placeholder='닉네임' required)   
+      button(type='submit') 회원가입
+    a(href="/") 💁💁💁 홈으로가기 

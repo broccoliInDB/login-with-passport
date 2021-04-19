@@ -53,13 +53,13 @@ if (process.env.NODE_ENV === 'production') {
     cookie: {
       httpOnly: true
       // secure: true
-    },
-    store: new RedisStore({
-      host: process.env.REDIS_HOST,
-      port: process.env.REDIS_POST,
-      password: process.env.REDIS_PASSWORD,
-      logErrors: true
-    })
+    }
+    // store: new RedisStore({
+    //   host: process.env.REDIS_HOST,
+    //   port: process.env.REDIS_POST,
+    //   password: process.env.REDIS_PASSWORD,
+    //   logErrors: true
+    // })
   }
   app.use(session(sessionProdOption))
 } else {

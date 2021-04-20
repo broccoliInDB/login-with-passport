@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { isLogged } = require('../middleware')
 const { User } = require('../models')
+const { logger } = require('../logger')
 
 router.get('/', isLogged, async (req, res, next) => {
   const { id } = req.query

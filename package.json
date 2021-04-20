@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "NODE_ENV=production nodemon app.js"
+    "preinstall": "npm install pm2 -g",
+    "start": "NODE_ENV=production pm2-runtime app.js"
   },
   "keywords": [],
   "author": "broccoliindb",

@@ -6,6 +6,7 @@ const passport = require('passport')
 const FileStore = require('session-file-store')(session)
 const flash = require('connect-flash')
 const morgan = require('morgan')
+const redis = require('redis')
 const RedisStore = require('connect-redis')(session)
 const passportConfig = require('./passport')
 const indexRouter = require('./routes')
@@ -45,7 +46,13 @@ if (process.env.NODE_ENV === 'production') {
 app.use(express.json())
 // url encoded body
 app.use(express.urlencoded({ extended: false }))
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'production') {
+  const client = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_POST,
+    password: process.env.REDIS_PASSWORD,
+    logErrors: true
+  })
   const sessionProdOption = {
     secret: process.env.SECRET,
     resave: false,
@@ -53,13 +60,8 @@ if (process.env.NODE_ENV === 'production') {
     cookie: {
       httpOnly: true
       // secure: true
-    }
-    // store: new RedisStore({
-    //   host: process.env.REDIS_HOST,
-    //   port: process.env.REDIS_POST,
-    //   password: process.env.REDIS_PASSWORD,
-    //   logErrors: true
-    // })
+    },
+    store: new RedisStore({ client })
   }
   app.use(session(sessionProdOption))
 } else {

@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(express.json())
 // url encoded body
 app.use(express.urlencoded({ extended: false }))
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
   const client = redis.createClient({
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_POST,
@@ -92,5 +92,6 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(process.env.PORT, () => {
+  logger.info(`🥎🥎🥎${process.env.NODE_ENV}`)
   logger.info(`server on ${process.env.PORT}`)
 })

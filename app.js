@@ -60,7 +60,8 @@ if (process.env.NODE_ENV === 'production') {
     cookie: {
       httpOnly: true,
       secure: true
-    }
+    },
+    store: new RedisStore({ client })
   }
   app.use(session(sessionProdOption))
 } else {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "preinstall": "npm install pm2 -g",
+    "preinstall": "npm install pm2 sequelize-cli -g",
     "start": "NODE_ENV=production pm2-runtime app.js -i 0"
   },
   "keywords": [],

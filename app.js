@@ -68,8 +68,7 @@ if (process.env.NODE_ENV === 'production') {
   const sessionDevOption = {
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true,
-    store: new FileStore()
+    saveUninitialized: true
   }
   app.use(session(sessionDevOption))
 }

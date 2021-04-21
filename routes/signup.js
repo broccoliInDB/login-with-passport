@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
     )
     if (user) {
       req.flash('info', '이미 있는 사용자 입니다. 다른 이메일로 가입해 주세요')
-      res.status(401).redirect('/signup')
+      return res.status(401).redirect('/signup')
     }
     const createdUser = await User.create({
       email,
@@ -32,7 +32,7 @@ router.post('/', async (req, res, next) => {
     req.login(createdUser, (err) => {
       if (err) {
         logger.info(err)
-        next(err)
+        return next(err)
       }
       req.session.save((err) => {
         if (err) {

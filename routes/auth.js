@@ -44,11 +44,28 @@ router.get('/logout', (req, res, next) => {
   req.session.save((err) => {
     if (err) {
       logger.error(err)
-      next(err)
+      return next(err)
     } else {
-      res.redirect('/')
+      return res.redirect('/')
     }
   })
 })
+
+router.get('/github', (req, res, next) => {
+  console.log('🪀🪀🪀 github login 1')
+  passport.authenticate('github', {
+    scope: ['user:email']
+  })(req, res, next)
+})
+
+router.get(
+  '/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+
+  (req, res, next) => {
+    console.log('🪀🪀🪀 github login 4')
+    res.redirect(`/user/${req.user.id}`)
+  }
+)
 
 module.exports = router

@@ -2,18 +2,19 @@ const passport = require('passport')
 const { User } = require('../models')
 const user = require('../models/user')
 const local = require('../passport/local')
+const github = require('../passport/github')
 const { logger } = require('../logger')
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
-    logger.info('🏊‍♀️🏊‍♀️🏊‍♀️ serialize', user)
+    console.log('🪀🪀🪀 github login 3')
     return done(null, user.id)
   })
   passport.deserializeUser(async (id, done) => {
     try {
-      logger.info('🥊🥊🥊 deserialize', id)
+      console.log('🪀🪀🪀 deserializeUser')
       const user = await User.findOne({
-        where: { id: id }
+        where: { id }
       })
       return done(null, user)
     } catch (error) {
@@ -24,4 +25,5 @@ module.exports = () => {
     }
   })
   local()
+  github()
 }

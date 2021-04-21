@@ -2,7 +2,7 @@ const { logger } = require('./logger')
 
 module.exports = {
   checkLoginStatus: (req, res, next) => {
-    logger.info('checkLoginStatus', req.user)
+    console.log('🪀🪀🪀 github login 5')
     if (req.user) {
       const { nickname, id } = req.user
       res.locals.isLogged = true

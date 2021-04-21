@@ -9,11 +9,19 @@ module.exports = (sequelize, DataTypes) => {
       },
       password: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: true
       },
       nickname: {
         type: DataTypes.STRING(30),
-        allowNull: false
+        allowNull: true
+      },
+      provider: {
+        type: DataTypes.STRING(30),
+        allowNull: true
+      },
+      githubId: {
+        type: DataTypes.STRING(30),
+        allowNull: true
       }
     },
     {

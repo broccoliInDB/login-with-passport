@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const router = require('express').Router()
 const { User } = require('../models')
 const { logger } = require('../logger')
+const { nanoid } = require('nanoid')
 require('dotenv').config()
 
 router.get('/', (req, res, next) => {

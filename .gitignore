@@ -52,7 +52,7 @@ Thumbs.db
 **/*.env
 
 # sessions
-sessions
+**/sessions/*
 
 # logs
 **/logs/*

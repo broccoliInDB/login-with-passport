@@ -19,6 +19,7 @@ const helmet = require('helmet')
 const hpp = require('hpp')
 const { logger } = require('./logger')
 require('dotenv').config()
+passportConfig()
 
 db.sequelize
   .sync()
@@ -33,7 +34,6 @@ const app = express()
 
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, './views'))
-passportConfig()
 
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'))
@@ -60,15 +60,15 @@ if (process.env.NODE_ENV === 'production') {
     cookie: {
       httpOnly: true,
       secure: true
-    },
-    store: new RedisStore({ client })
+    }
   }
   app.use(session(sessionProdOption))
 } else {
   const sessionDevOption = {
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new FileStore()
   }
   app.use(session(sessionDevOption))
 }
@@ -92,6 +92,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(process.env.PORT, () => {
-  logger.info(`🥎🥎🥎${process.env.NODE_ENV}`)
   logger.info(`server on ${process.env.PORT}`)
 })

@@ -33,6 +33,7 @@ module.exports = () => {
         profileFields: ['id', 'displayName', 'photos', 'email']
       },
       async (accessToken, refreshToken, profile, done) => {
+        console.log('@@@@@ facebook profile', profile)
         try {
           const {
             _json: { id, email, name }

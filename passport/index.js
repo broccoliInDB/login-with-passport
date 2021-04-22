@@ -5,6 +5,7 @@ const local = require('./local')
 const github = require('./github')
 const google = require('./google')
 const kakao = require('./kakao')
+const facebook = require('./facebook')
 const { logger } = require('../logger')
 
 module.exports = () => {
@@ -30,4 +31,5 @@ module.exports = () => {
   github()
   google()
   kakao()
+  facebook()
 }

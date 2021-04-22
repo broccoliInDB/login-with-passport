@@ -33,10 +33,44 @@ module.exports = () => {
         profileFields: ['id', 'displayName', 'photos', 'email']
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log('accessToken', accessToken)
-        console.log('refreshToken', refreshToken)
-        console.log('profile', profile)
-        return done(null, profile)
+        try {
+          const {
+            _json: { id, email, name }
+          } = profile
+          const user = await User.findOne({
+            where: { facebookId: profile.id }
+          })
+          if (!user) {
+            const existedUser = await User.findOne({
+              where: { email }
+            })
+            if (existedUser) {
+              await User.update(
+                {
+                  facebookId: id
+                },
+                {
+                  where: { email }
+                }
+              )
+              return done(null, existedUser)
+            } else {
+              const createdUser = await User.create({
+                facebookId: profile.id,
+                email,
+                nickname: name
+              })
+              return done(null, createdUser)
+            }
+          } else {
+            return done(null, user)
+          }
+        } catch (error) {
+          if (error) {
+            console.error(error)
+            done(error)
+          }
+        }
       }
     )
   )

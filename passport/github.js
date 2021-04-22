@@ -14,7 +14,6 @@ module.exports = () => {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          console.log('🪀🪀🪀 github login 2')
           const {
             _json: { id, email },
             username
@@ -36,13 +35,27 @@ module.exports = () => {
                 (email) => email.primary === true && email.verified === true
               )
             }
-
-            const createdUser = await User.create({
-              githubId: profile.id,
-              email: email ? email : foundEmail.email,
-              nickname: profile.username
+            const existedUser = await User.findOne({
+              where: { email: foundEmail.email }
             })
-            return done(null, createdUser)
+            if (existedUser) {
+              await User.update(
+                {
+                  githubId: profile.id
+                },
+                {
+                  where: { email: foundEmail.email }
+                }
+              )
+              return done(null, existedUser)
+            } else {
+              const createdUser = await User.create({
+                githubId: profile.id,
+                email: email ? email : foundEmail.email,
+                nickname: profile.username
+              })
+              return done(null, createdUser)
+            }
           } else {
             return done(null, user)
           }

@@ -57,7 +57,10 @@ if (process.env.NODE_ENV === 'production') {
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
+    proxy: true,
     cookie: {
+      secure: true,
+      maxAge: 60 * 1 * 1 * 1,
       httpOnly: true
       // secure: true
     },

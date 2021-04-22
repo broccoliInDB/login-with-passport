@@ -94,7 +94,8 @@ router.get(
 
 router.get('/facebook', (req, res, next) => {
   passport.authenticate('facebook', {
-    scope: ['email', 'name']
+    authType: 'reauthenticate',
+    scope: ['email', 'public_profile']
   })(req, res, next)
 })
 

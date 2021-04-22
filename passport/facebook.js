@@ -17,9 +17,10 @@ require('dotenv').config()
 2021-04-22T04:26:44.016572+00:00 app[web.1]: gender: undefined,
 2021-04-22T04:26:44.016573+00:00 app[web.1]: profileUrl: undefined,
 2021-04-22T04:26:44.016573+00:00 app[web.1]: provider: 'facebook',
-2021-04-22T04:26:44.016574+00:00 app[web.1]: _raw: '{"name":"Yongbum Choi","id":"3743461675702395"}',
-2021-04-22T04:26:44.016574+00:00 app[web.1]: _json: { name: 'Yongbum Choi', id: '3743461675702395' }
-2021-04-22T04:26:44.016575+00:00 app[web.1]: }
+emails: [ { value: 'cyb1117@naver.com' } ], 
+photos: [ { value: 'https://platform-lookaside.fbsbx.com/platform }]
+_raw: '{"name":"Yongbum Choi","id":"3743461675702395"}',
+_json: { name: 'Yongbum Choi', id: '3743461675702}
 */
 
 module.exports = () => {
@@ -32,7 +33,9 @@ module.exports = () => {
         profileFields: ['id', 'displayName', 'photos', 'email']
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log('facebook로그인', profile, profile._json)
+        console.log('accessToken', accessToken)
+        console.log('refreshToken', refreshToken)
+        console.log('profile', profile)
         return done(null, profile)
       }
     )

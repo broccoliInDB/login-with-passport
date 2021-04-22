@@ -81,17 +81,27 @@ router.get(
 )
 
 router.get('/kakao', (req, res, next) => {
-  console.log('🪀🪀🪀 kakao login 1')
   passport.authenticate('kakao')(req, res, next)
 })
-
-// router.get('/kakao', passport.authenticate('kakao'))
 
 router.get(
   '/kakao/callback',
   passport.authenticate('kakao', { failureRedirect: '/' }),
   (req, res, next) => {
-    console.log('🪀🪀🪀 kakao login 4')
+    res.redirect(`/user/${req.user.id}`)
+  }
+)
+
+router.get('/facebook', (req, res, next) => {
+  passport.authenticate('facebook', {
+    scope: ['email']
+  })(req, res, next)
+})
+
+router.get(
+  '/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  (req, res, next) => {
     res.redirect(`/user/${req.user.id}`)
   }
 )

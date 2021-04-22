@@ -26,6 +26,14 @@ module.exports = (sequelize, DataTypes) => {
       googleId: {
         type: DataTypes.STRING(30),
         allowNull: true
+      },
+      kakaoId: {
+        type: DataTypes.STRING(30),
+        allowNull: true
+      },
+      facebookId: {
+        type: DataTypes.STRING(30),
+        allowNull: true
       }
     },
     {

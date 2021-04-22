@@ -1,13 +1,15 @@
 const passport = require('passport')
 const { User } = require('../models')
 const user = require('../models/user')
-const local = require('../passport/local')
-const github = require('../passport/github')
+const local = require('./local')
+const github = require('./github')
+const google = require('./google')
+const kakao = require('./kakao')
 const { logger } = require('../logger')
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
-    console.log('🪀🪀🪀 github login 3')
+    console.log('🪀🪀🪀 login 3', user)
     return done(null, user.id)
   })
   passport.deserializeUser(async (id, done) => {
@@ -26,4 +28,6 @@ module.exports = () => {
   })
   local()
   github()
+  google()
+  kakao()
 }

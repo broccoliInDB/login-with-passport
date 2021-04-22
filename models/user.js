@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       githubId: {
         type: DataTypes.STRING(30),
         allowNull: true
+      },
+      googleId: {
+        type: DataTypes.STRING(30),
+        allowNull: true
       }
     },
     {

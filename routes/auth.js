@@ -52,7 +52,6 @@ router.get('/logout', (req, res, next) => {
 })
 
 router.get('/github', (req, res, next) => {
-  console.log('🪀🪀🪀 github login 1')
   passport.authenticate('github', {
     scope: ['user:email']
   })(req, res, next)
@@ -63,7 +62,36 @@ router.get(
   passport.authenticate('github', { failureRedirect: '/' }),
 
   (req, res, next) => {
-    console.log('🪀🪀🪀 github login 4')
+    res.redirect(`/user/${req.user.id}`)
+  }
+)
+
+router.get('/google', (req, res, next) => {
+  passport.authenticate('google', {
+    scope: ['email', 'profile']
+  })(req, res, next)
+})
+
+router.get(
+  '/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res, next) => {
+    res.redirect(`/user/${req.user.id}`)
+  }
+)
+
+router.get('/kakao', (req, res, next) => {
+  console.log('🪀🪀🪀 kakao login 1')
+  passport.authenticate('kakao')(req, res, next)
+})
+
+// router.get('/kakao', passport.authenticate('kakao'))
+
+router.get(
+  '/kakao/callback',
+  passport.authenticate('kakao', { failureRedirect: '/' }),
+  (req, res, next) => {
+    console.log('🪀🪀🪀 kakao login 4')
     res.redirect(`/user/${req.user.id}`)
   }
 )

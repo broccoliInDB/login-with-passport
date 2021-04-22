@@ -40,8 +40,7 @@ module.exports = () => {
             const createdUser = await User.create({
               githubId: profile.id,
               email: email ? email : foundEmail.email,
-              nickname: profile.username,
-              provider: profile.provider
+              nickname: profile.username
             })
             return done(null, createdUser)
           } else {
